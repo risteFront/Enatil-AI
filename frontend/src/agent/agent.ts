@@ -21,7 +21,7 @@ const requests = {
 };
 
 const Crawler = {
-  crawl: (url) =>
+  crawl: (url:string) =>
     requests.post('/crawler/crawl', {url}),
   getHistory: () =>
     requests.get(`/crawler/history`),
