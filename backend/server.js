@@ -36,8 +36,16 @@ app.use(compression());
 app.use(cookieParser());
 
 // allow AJAX requests to skip the Same-origin policy and access resources from remote hosts
-app.use(cors());
+app.use(cors({credentials: true, origin: 'http://localhost:8000'}));
 
+
+//TODO need to remove the comments of headers
+
+
+// app.use((req, res, next) => {
+//   res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
+//   next();
+//})
 // serve a visual favicon for the browser
 app.use(favicon(__dirname + '/favicon.ico'));
 
