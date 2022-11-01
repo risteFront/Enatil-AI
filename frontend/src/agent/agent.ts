@@ -1,4 +1,7 @@
 import superagent from 'superagent';
+
+// import interface for post request 
+
 import FormValue from "./apiInterface"
 const API = 'http://localhost:3000';
 const responseBody = (res: any) => {
@@ -23,7 +26,7 @@ const requests = {
 };
 
 const Crawler = {
-  crawl: (url: string , body: FormValue | any) => requests.post('/crawler/crawl', { url  , body}),
+  crawl: ( url: string ) => requests.post('/crawler/crawl', { url}),
   getHistory: () => requests.get(`/crawler/history`)
 };
 

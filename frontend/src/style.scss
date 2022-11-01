@@ -4,6 +4,15 @@ body {
   -moz-osx-font-smoothing: grayscale;
   font-family: 'Segoe UI', 'Roboto', 'Oxygen';
 }
+body{
+  background: linear-gradient(0deg, #84d4d0, #a5a5a5);
+
+}
+html{
+  
+  overflow: -moz-scrollbars-vertical;
+  overflow-y: scroll;
+}
 
 * {
   box-sizing: border-box;

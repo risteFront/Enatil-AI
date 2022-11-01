@@ -1,11 +1,24 @@
 import mongoose, { Schema } from 'mongoose';
 
 const crawledPageSchema = new Schema({
-  url: {
+  title: {
     type: String,
     required: true
   },
   //todo: add here the missing fields
+  links:{
+    type:String,
+    require:true,
+  },
+  
+  snippet:{
+    type:String,
+    require:true
+  },
+  displayedLink:{
+    type:String,
+    required:true,
+  },
   creationDate: {
     type: Date,
     default: Date.now
