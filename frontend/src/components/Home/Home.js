@@ -15,12 +15,12 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 
 import Alert from '@material-ui/lab/Alert';
-import {EnhancedTableToolbar} from "./Toolbar"
-import EnhancedTableHead from "./TableHead"
+import { EnhancedTableToolbar } from './Toolbar';
+import EnhancedTableHead from './TableHead';
 import { Container, Grid, Button, TextField, InputLabel } from '@material-ui/core';
-import Paginations from "./Paginations"
-import classes  from './classes';
-import {getSorting , stableSort , desc} from "./Helpers"
+import Paginations from './Paginations';
+import classes from './classes';
+import { getSorting, stableSort, desc } from './Helpers';
 import Spinner from './Spinner';
 const Home = () => {
   const [formValues, setFormValues] = useState([]);
@@ -33,7 +33,6 @@ const Home = () => {
   const [urlValue, setUrlValue] = React.useState('');
   const [errorUrl, setErrorsUrl] = React.useState(true);
   const [handleUrl, setHandleUrl] = React.useState(false);
-
 
   const callHistory = () => {
     agent.Crawler.getHistory()
@@ -50,15 +49,15 @@ const Home = () => {
   }, []);
 
   const handleNewScrawl = async () => {
-    if (urlValue.includes('http')) {
+    if (urlValue.includes('www.google.com/')) {
       setErrorsUrl(false);
-      setHandleUrl(false)
+      setHandleUrl(false);
       // console.log('includes');
       const newData = await agent.Crawler.crawl(urlValue);
       console.log(newData, 'awdaw');
       setFormValues([...newData, ...formValues]);
-    }else{
-      setHandleUrl(true)
+    } else {
+      setHandleUrl(true);
     }
     setErrorsUrl(true);
   };
@@ -117,8 +116,8 @@ const Home = () => {
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, formValues.length - page * rowsPerPage);
 
   return (
-    <div >
-      <Container maxWidth='sm' style={{ marginTop: '150px' }} >
+    <div>
+      <Container maxWidth='sm' style={{ marginTop: '150px' }}>
         <Grid container spacing={3}>
           <Grid item xs>
             <TextField onChange={handleChangeUrl} style={{ width: '100%' }} id='outlined-basic' label='Enter URL' variant='outlined' />
@@ -131,11 +130,12 @@ const Home = () => {
           </Grid>
         </Grid>
       </Container>
-      <div className={classes.root}>
-
-        <Paper className={classes.paper} style={{
-      backgroundColor: errorUrl === false ? '#ddd' : '#fff'
-    }}>
+      <div className={classes.root} style={{paddingTop:"3rem"}}>
+        <Paper
+          className={classes.paper}
+          style={{
+            backgroundColor: errorUrl === false ? '#ddd' : '#fff'
+          }}>
           <EnhancedTableToolbar numSelected={selected.length} />
           <div className={classes.tableWrapper}>
             <Table className={classes.table} aria-labelledby='tableTitle' size={dense ? 'small' : 'medium'} aria-label='enhanced table'>
@@ -148,9 +148,9 @@ const Home = () => {
                 onRequestSort={handleRequestSort}
                 rowCount={formValues.length}
               />
-              
+                {errorUrl === false && <Spinner />}
+
               <TableBody>
-           {errorUrl === false && <Spinner />}   
 
                 {stableSort(formValues, getSorting(order, orderBy))
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
@@ -175,6 +175,7 @@ const Home = () => {
                         <TableCell align='right'>{row.links}</TableCell>
                         <TableCell align='right'>{row.displayedLink}</TableCell>
                         <TableCell align='right'>{row.snippet}</TableCell>
+
                       </TableRow>
                     );
                   })}
@@ -198,8 +199,8 @@ const Home = () => {
             nextIconButtonProps={{
               'aria-label': 'next page'
             }}
-            onChangePage={handleChangePage}
-            onChangeRowsPerPage={handleChangeRowsPerPage}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
           />
         </Paper>
         <FormControlLabel control={<Switch checked={dense} onChange={handleChangeDense} />} label='Dense padding' />

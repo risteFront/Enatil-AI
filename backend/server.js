@@ -1,19 +1,19 @@
-import compression from 'compression';
-import cookieParser from 'cookie-parser';
-import cors from 'cors';
-import dotenv from 'dotenv';
-import express from 'express';
-import mongoSanitize from 'express-mongo-sanitize';
-import rateLimit from 'express-rate-limit';
-import helmet from 'helmet';
-import hpp from 'hpp';
-import mongoose from 'mongoose';
-import morgan from 'morgan';
-import emoji from 'node-emoji';
-import responseTime from 'response-time';
-import favicon from 'serve-favicon';
-import indexRouter from './routes/index';
-import crawlerRouter from './routes/crawler';
+const compression =require('compression');
+const cookieParser =require('cookie-parser');
+const cors =require('cors');
+const dotenv = require('dotenv');
+const express = require('express');
+const mongoSanitize = require('express-mongo-sanitize');
+const rateLimit = require('express-rate-limit');
+const helmet = require('helmet');
+const hpp = require('hpp');
+const mongoose = require('mongoose');
+const morgan = require('morgan');
+const emoji = require('node-emoji');
+const responseTime =require('response-time');
+const favicon =require('serve-favicon');
+const indexRouter  =require('./routes/index.js');
+const crawlerRouter  =require('./routes/crawler');
 
 const app = express();
 
@@ -36,17 +36,10 @@ app.use(compression());
 app.use(cookieParser());
 
 // allow AJAX requests to skip the Same-origin policy and access resources from remote hosts
-app.use(cors({credentials: true, origin: 'http://localhost:8000'}));
+app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
 
 
-//TODO need to remove the comments of headers
 
-
-// app.use((req, res, next) => {
-//   res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
-//   next();
-//})
-// serve a visual favicon for the browser
 app.use(favicon(__dirname + '/favicon.ico'));
 
 // request logger | (dev) output are colored by response status
@@ -73,7 +66,7 @@ app.use(mongoSanitize());
 // mongodb connection
 mongoose
   .connect(
-    `mongodb://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.HOST}:${process.env.MONGO_PORT}/${process.env.DATABASE}`,
+    `mongodb://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.HOST_DOCKER}:${process.env.MONGO_PORT}/${process.env.DATABASE}`,
     {
       useCreateIndex: true,
       useNewUrlParser: true,
@@ -89,10 +82,10 @@ app.use('/', indexRouter);
 app.use('/crawler', crawlerRouter);
 
 // setup ip address and port number
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.SERVER_PORT || 4000);
 app.set('ipaddr', '0.0.0.0');
 
 // start express server
 app.listen(app.get('port'), app.get('ipaddr'), function () {
-  console.log(emoji.get('heart'), 'The server is running @ ' + 'http://localhost/' + app.get('port'), emoji.get('heart'));
+  console.log(emoji.get('heart'), 'The server is running @ ' + 'http://localhost/' + process.env.SERVER_PORT, emoji.get('heart'));
 });

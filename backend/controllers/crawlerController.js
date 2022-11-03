@@ -1,16 +1,11 @@
 const cheerio = require('cheerio');
 const unirest = require('unirest');
 
-// const rp = require('request-promise');
-// const  HTMLParser = require('node-html-parser');
-// const requestModule = require("request");
-// const formidableMiddleware = require('express-formidable');
 
-import CrawledPage from '../models/CrawledPageModel';
+const CrawledPage = require('../models/CrawledPageModel');
 
-export const crawl = async (req, res) => {
+const  crawl = async (req, res) => {
   const {url} = req.body
-  console.log(url , "sapspeapsokei");
   return unirest
     .get(url)
     .headers({
@@ -23,7 +18,6 @@ export const crawl = async (req, res) => {
       let links = [];
       let snippets = [];
       let displayedLinks = [];
-
       $('.yuRUbf > a > h3').each((i, el) => {
         titles[i] = $(el).text();
       });
@@ -34,6 +28,7 @@ export const crawl = async (req, res) => {
         snippets[i] = $(el).text();
       });
       $('.g .yuRUbf .NJjxre .tjvcx').each((i, el) => {
+
         displayedLinks[i] = $(el).text();
       });
 
@@ -44,9 +39,8 @@ export const crawl = async (req, res) => {
           title: titles[i],
           links: links[i],
           snippet: snippets[i],
-          displayedLink: displayedLinks[i]
+          displayedLink: displayedLinks[i],
         };
-
         const doc = CrawledPage.create(
           organicResults, function (err , data) {
             if (err) {
@@ -59,12 +53,13 @@ export const crawl = async (req, res) => {
 };
 
 //load history using mongoose -> https://mongoosejs.com/
-export const getHistory = (req, res) => {
+ const getHistory = (req, res) => {
   CrawledPage.find({}, (error, pages) => {
     if (error) {
       return res.status(400).json(error);
     }
-    console.log(pages);
     res.send(pages);
   });
 };
+
+module.exports = {crawl ,getHistory }

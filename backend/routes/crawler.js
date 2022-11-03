@@ -1,9 +1,9 @@
-import express from 'express';
-import { crawl, getHistory } from '../controllers/crawlerController';
+const express = require('express');
+const crwlerController = require('../controllers/crawlerController');
 let crawlerRouter = express.Router();
 
 // we protect the POST, PUT and DELETE methods
-crawlerRouter.post('/crawl', crawl);
-crawlerRouter.get('/history', getHistory);
+crawlerRouter.post('/crawl', crwlerController.crawl);
+crawlerRouter.get('/history', crwlerController.getHistory);
 
-export default crawlerRouter;
+module.exports = crawlerRouter;

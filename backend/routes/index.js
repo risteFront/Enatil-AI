@@ -1,4 +1,4 @@
-import express from 'express';
+const  express = require('express');
 let indexRouter = express.Router();
 
 indexRouter.get('/', function (req, res) {
@@ -18,4 +18,4 @@ indexRouter.get('/', function (req, res) {
   });
 });
 
-export default indexRouter;
+module.exports = indexRouter;

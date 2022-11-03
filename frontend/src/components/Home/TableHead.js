@@ -10,7 +10,8 @@ const headCells = [
     { id: 'title', numeric: false, disablePadding: true, label: 'Ttile (Page)' },
     { id: 'links', numeric: false, disablePadding: true, label: 'Links' },
     { id: 'displayedLink', numeric: false, disablePadding: true, label: 'DisplayedLink (url)' },
-    { id: 'snippet', numeric: false, disablePadding: true, label: 'Snippet' }
+    { id: 'snippet', numeric: false, disablePadding: true, label: 'Snippet' },
+
   ];
   function EnhancedTableHead(props) {
     const { classes, onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } = props;

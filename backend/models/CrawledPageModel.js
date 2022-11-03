@@ -1,6 +1,6 @@
-import mongoose, { Schema } from 'mongoose';
+const mongoose =  require('mongoose');
 
-const crawledPageSchema = new Schema({
+const crawledPageSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true
@@ -29,4 +29,4 @@ const crawledPageSchema = new Schema({
   }
 });
 
-export default mongoose.model('CrawledPage', crawledPageSchema);
+module.exports = mongoose.model('CrawledPage', crawledPageSchema);
