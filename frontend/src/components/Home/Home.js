@@ -18,7 +18,6 @@ import Alert from '@material-ui/lab/Alert';
 import { EnhancedTableToolbar } from './Toolbar';
 import EnhancedTableHead from './TableHead';
 import { Container, Grid, Button, TextField, InputLabel } from '@material-ui/core';
-import Paginations from './Paginations';
 import classes from './classes';
 import { getSorting, stableSort, desc } from './Helpers';
 import Spinner from './Spinner';
