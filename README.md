@@ -5,7 +5,6 @@
 You can use Docker Compose to install MongoDB locally.
 To do this run this commandes at the root directory
 
-- docker-compose up --build -d mongodb
 - docker-compose up
 
 To access MongoDB console shell, you can use **`> docker exec -it mongodb bash`**
@@ -13,19 +12,25 @@ To access MongoDB console shell, you can use **`> docker exec -it mongodb bash`*
 This repo uses yarn workspaces
 https://classic.yarnpkg.com/en/docs/workspaces/
 
-To install all the packages, please run (at the root folder):
+To install all the packages, please go  to balckend folder (at the root folder):
 
-- yarn install
+- npm install
 
 ## Backend (Node.js | Express | MongoDB)
 
-- yarn start
-- open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- npm start
+- open [http://localhost:8000](http://localhost:8000) to view it in the browser.
 
 ## Frontend (React | Formik | Material-UI)
 
-- yarn start
-- open [http://localhost:8000](http://localhost:8000) to view it in the browser. You can change the **port** in the /frontend/.env file
+To install all the packages, please go  to frontend folder (at the root folder):
+
+- npm  start
+
+To Start the project
+
+- npm run client
+- open [http://localhost:3000](http://localhost:3000) to view it in the browser. You can change the **port** in the /frontend/.env file
 
 
 :warning: 	__**Important**__ :warning:
